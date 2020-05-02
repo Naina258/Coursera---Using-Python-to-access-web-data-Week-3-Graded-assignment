@@ -1,0 +1,13 @@
+import urllib
+from bs4 import BeautifulSoup
+url = input('Enter Url: ')
+count = int(input("Enter count: "))
+position = int(input("Enter position:"))
+
+
+for i in range(int(count)):
+    html = urllib.request.urlopen(url).read()
+    soup = BeautifulSoup(html,"html.parser")
+    tags = soup('a')
+    url = tags[int(position)-1].get('href',None)
+    print (url)
