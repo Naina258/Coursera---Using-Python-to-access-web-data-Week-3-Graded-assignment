@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat May  2 09:41:42 2020
+
+@author: lenovo
+"""
+
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import ssl
+
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url = input('Enter - ')
+html = urlopen(url, context=ctx).read()
+soup = BeautifulSoup(html, "html.parser")
+
+# Retrieve all of the span
+s = soup('span')
+count=0
+sum=0
+for i in s:
+    x=int(i.text)
+    count=count+1
+    sum = sum + x
+print (sum)
